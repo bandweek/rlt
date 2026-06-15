@@ -340,12 +340,13 @@ where
     // Handle regression for CI
     if cli.fail_on_regression
         && let Some(ref cmp) = cmp
-        && matches!(cmp.verdict, Verdict::Regressed | Verdict::Mixed)
     {
-        return Err(crate::Error::Regression {
-            verdict: cmp.verdict,
-            baseline: cmp.baseline_name.clone(),
-        });
+        if matches!(cmp.verdict, Verdict::Regressed | Verdict::Mixed) {
+            return Err(crate::Error::Regression {
+                verdict: cmp.verdict,
+                baseline: cmp.baseline_name.clone(),
+            });
+        }
     }
 
     Ok(())
