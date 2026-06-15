@@ -1,0 +1,3 @@
+# CI replay marker for lint/clippy
+feature_branch: replay-b7143e65
+workflow: .github/workflows/check.yml
